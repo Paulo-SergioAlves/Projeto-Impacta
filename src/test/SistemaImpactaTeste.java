@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PlantioMudasTest {
+public class SistemaImpactaTeste {
 
     @Test
     @DisplayName("Deve Calcular corretamente a Pontuação do Plantio de mudas")
