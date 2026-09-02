@@ -36,7 +36,7 @@ public class Oficina extends Acao {
         int pontuacao = duracaoHoras *3;
 
         if (kitMaterial){
-            pontuacao =+10;
+            pontuacao +=10;
         }
         return pontuacao;
     }
