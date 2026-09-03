@@ -51,6 +51,54 @@ public class SistemaImpactaTeste {
         );
     }
 
+    @Test
+    @DisplayName("Deve desempatar os volúntarios por nome")
+    public void deveDesempatarPorNome() {
+
+        Voluntario voluntario1 =
+                new Voluntario("Daniel", "daniel2@email.com", "004");
+
+        Voluntario voluntario2 =
+                new Voluntario("Lucas", "lucas2@email.com", "005");
+
+        Voluntario voluntario3 =
+                new Voluntario("Paulo", "paulo2@email.com", "006");
+
+        voluntario1.adicionarParticipacao(60);
+        voluntario2.adicionarParticipacao(60);
+        voluntario3.adicionarParticipacao(10);
+
+        java.util.List<Voluntario> voluntarios =
+                new java.util.ArrayList<>();
+
+        voluntarios.add(voluntario1);
+        voluntarios.add(voluntario2);
+        voluntarios.add(voluntario3);
+
+        String[] resultado =
+                Ranking.ordenarVoluntarios(voluntarios);
+
+        assertEquals(
+                "Daniel - 1 ações - 60 pontos",
+                resultado[0]
+        );
+
+        assertEquals(
+                "Lucas - 1 ações - 60 pontos",
+                resultado[1]
+        );
+
+        assertEquals(
+                "Paulo - 1 ações - 10 pontos",
+                resultado[2]
+        );
+    }
+
+
 
 
 }
+
+
+
+
