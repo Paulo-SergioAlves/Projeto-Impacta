@@ -115,6 +115,15 @@ public class SistemaImpactaTeste {
         assertEquals(20, mutirao.calcularPontuacao());
     }
 
+    @Test
+    @DisplayName("Deve calcular corretamente a pontuação  da Oficina sem kit")
+    public void deveCalcularPontuacaoOficina() {
+        Oficina oficina = new Oficina(3,"Oficina ecológica","Reciclagem",LocalDateTime.now(),20,2,false);
+        assertEquals(6,oficina.calcularPontuacao());
+    }
+
+
+
 
 
 
