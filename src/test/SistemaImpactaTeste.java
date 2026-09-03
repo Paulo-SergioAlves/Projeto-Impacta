@@ -1,8 +1,6 @@
 package test;
 
-import impacta.PlantioMudas;
-import impacta.Ranking;
-import impacta.Voluntario;
+import impacta.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -108,6 +106,18 @@ public class SistemaImpactaTeste {
 
 
     }
+
+    @Test
+    @DisplayName("Deve calcular corretamente a pontuacão do Mutirao")
+    public void deveCalcularPontuacaoMutirao() {
+        Mutirao mutirao = new Mutirao(2,"Mutirao de reciclagem","Coleta de material de reciclagem",LocalDateTime.now(),20,5
+        );
+        assertEquals(20, mutirao.calcularPontuacao());
+    }
+
+
+
+
 
 
 
