@@ -1,9 +1,13 @@
 package test;
 
+import impacta.PlantioMudas;
 import impacta.Ranking;
 import impacta.Voluntario;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SistemaImpactaTeste {
@@ -93,6 +97,18 @@ public class SistemaImpactaTeste {
                 resultado[2]
         );
     }
+
+    @Test
+    @DisplayName("Deve Calcular corretamente a Pontuação do Plantio de mudas")
+    public void deveCalcularPontuacaoPlantio() {
+        PlantioMudas plantio = new PlantioMudas(
+                1,"Plantio de arvores","Plantio de mudas", LocalDateTime.now(),20,10
+        );
+        assertEquals(25,plantio.calcularPontuacao());
+
+
+    }
+
 
 
 
