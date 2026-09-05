@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SistemaImpactaTeste {
 
@@ -122,14 +123,97 @@ public class SistemaImpactaTeste {
         assertEquals(6,oficina.calcularPontuacao());
     }
 
+    @Test
+    @DisplayName("Deve lançar exceção ao cadastrar email duplicado ")
+    public void develancarExcecaoEmailDuplicado() {
+
+        Impacta sistema = new Impacta();
+
+        sistema.cadastrarVoluntario(
+                "Daniel",
+                "daniel@email.com",
+                "001");
+
+
+        assertThrows(
+                EmailDuplicadoException.class,
+                () -> sistema.cadastrarVoluntario(
+                        "Lucas",
+                        "daniel@email.com",
+                        "002")
+
+        );
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção ao inscrever voluntário em ação lotada")
+    public void deveLancarExcecaoAcaoLotada() {
+
+        Impacta sistema = new Impacta();
+
+        sistema.cadastrarVoluntario(
+                "Daniel",
+                "daniel@gmail.com",
+                "001"
+        );
+
+        sistema.cadastrarVoluntario(
+                "Lucas",
+                "lucas@email.com",
+                "002"
+
+
+        );
+
+        int idAcao = sistema.cadastrarPlantio(
+                "Plantio de arvores",
+                "Plantio de mudas",
+                "05/09/2026 14:00",
+                1,
+                10
+
+
+        );
+
+        sistema.inscreverVoluntario("daniel@gmail.com" , idAcao);
+
+        assertThrows(
+                AcaoLotadaException.class,
+                () -> sistema.inscreverVoluntario("lucas@email.com", idAcao)
+        );
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção ao inscrever voluntário duas vezes na mesma ação")
+    public void deveLancarExcecaoInscricaoDuplicada() {
+        Impacta sistema = new Impacta();
+
+        sistema.cadastrarVoluntario(
+                "Daniel",
+                "daniel@gmail.com",
+                "001"
+
+
+        );
+
+        int idAcao = sistema.cadastrarPlantio(
+                "Plantio de arvores",
+                "Plantio de mudas",
+                "05/09/2026 14:00",
+                5,
+                10
 
 
 
+        );
 
+        sistema.inscreverVoluntario("daniel@gmail.com", idAcao);
 
-
-
-
+        assertThrows(
+                InscricaoDuplicadaException.class,
+                () -> sistema.inscreverVoluntario("daniel@gmail.com", idAcao)
+        );
+    }
 
 
 }
